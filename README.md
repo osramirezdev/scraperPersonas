@@ -7,7 +7,7 @@
   </a>
   <br>
 </p>
-<p align="center">
+<p align="left">
   <b>ScraperPersonas</b> provee un RESTfulapi para obtener datos de cédulas, haciendo scraping de los siguientes sitios:
   <br>
   <ol>
