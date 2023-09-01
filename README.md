@@ -11,16 +11,15 @@
   <b>ScraperPersonas</b> provee un RESTfulapi para obtener datos de cédulas, haciendo scraping de los siguientes sitios:
   <br>
   <ol>
-    <li><a href="https://ruc.com.py">Datos de RUC</a></li>
-    <li><a href="https://servicios.ips.gov.py/consulta_asegurado/comprobacion_de_derecho_externo.php">Datos de IPS</a></li>
-    <li><a href="https://datos.sfp.gov.py/data/funcionarios">Datos de Funcionarios Publicos</a></li>
+    <li><a target="_blank" href="https://ruc.com.py">Datos de RUC</a></li>
+    <li><a target="_blank" href="https://servicios.ips.gov.py/consulta_asegurado/comprobacion_de_derecho_externo.php">Datos de IPS</a></li>
+    <li><a target="_blank" href="https://datos.sfp.gov.py/data/funcionarios">Datos de Funcionarios Publicos</a></li>
   </ol>
 </p>
 
-It is a simple Go application to scrape the MTESS courses website in the SNPP section.
 ## ⚙️ Installation
 
-Para correrlo localmente, tener intalado Go ([download](https://go.dev/dl/)). Version `1.17` o superior.
+Para correrlo localmente, tener intalado Go ([download](https://go.dev/dl/){:target="_blank"}). Version `1.17` o superior.
 
 ```bash
 go mod download
