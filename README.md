@@ -19,7 +19,7 @@
 
 ## ⚙️ Installation
 
-Para correrlo localmente, tener intalado Go ([download](https://go.dev/dl/){:target="_blank"}). Version `1.17` o superior.
+Para correrlo localmente, tener intalado Go [download](https://go.dev/dl/){:target="_blank"} . Version `1.17` o superior.
 
 ```bash
 go mod download
