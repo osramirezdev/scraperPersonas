@@ -1,4 +1,4 @@
-![Scraper Personas](scraperpersona.jpg)
+![Scraper Personas](scraperpersona.png)
 
 It is a simple Go application to scrape the MTESS courses website in the SNPP section.
 ## 🔧 Requirements
