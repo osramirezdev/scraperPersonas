@@ -8,7 +8,7 @@
   <br>
 </p>
 <p align="center">
-  <b>ScraperPersonas</b> provee un api para obtener datos de cédulabs, haciendo scraping de los siguientes sitios:
+  <b>ScraperPersonas</b> provee un RESTfulapi para obtener datos de cédulas, haciendo scraping de los siguientes sitios:
   <br>
   <ol>
     <li><a href="https://ruc.com.py">Datos de RUC</a></li>
