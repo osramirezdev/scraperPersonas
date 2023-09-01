@@ -18,14 +18,14 @@
 </p>
 
 It is a simple Go application to scrape the MTESS courses website in the SNPP section.
-## 🔧 Requirements
+## ⚙️ Installation
 
-- Go
-- Git
-- Make
-- A mysql database
+Para correrlo localmente, tener intalado Go ([download](https://go.dev/dl/)). Version `1.17` o superior.
 
-## 📦 Installation
+```bash
+go mod download
+```
+
 
 ## 🚀 Usage
 
