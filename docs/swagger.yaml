@@ -1,0 +1,405 @@
+basePath: /api
+definitions:
+  dtos.Asegurado:
+    properties:
+      apellidos:
+        type: string
+      beneficiarios_activos:
+        type: string
+      documento:
+        type: string
+      empleadores:
+        items:
+          $ref: '#/definitions/dtos.Empleador'
+        type: array
+      enrolado:
+        type: string
+      fecha_nacimiento:
+        type: string
+      id:
+        type: string
+      nombres:
+        type: string
+      sexo:
+        type: string
+      tipo:
+        type: string
+      vencimiento:
+        type: string
+    type: object
+  dtos.Asignacion:
+    properties:
+      actualizacion:
+        type: string
+      cargo:
+        type: string
+      categoria:
+        type: string
+      correo:
+        type: string
+      devengado:
+        type: integer
+      estado:
+        type: string
+      fecha_administrativo:
+        type: string
+      financiamiento:
+        type: string
+      funcion:
+        type: string
+      gasto:
+        type: string
+      id:
+        type: string
+      linea:
+        type: string
+      lugar:
+        type: string
+      motivo_movimiento:
+        type: string
+      movimiento:
+        type: string
+      oficina:
+        type: string
+      presupuestado:
+        type: integer
+      profesion:
+        type: string
+    type: object
+  dtos.Empleador:
+    properties:
+      abonado:
+        type: string
+      aportes:
+        type: integer
+      empleador:
+        type: string
+      estado:
+        type: string
+      id:
+        type: string
+      patronal:
+        type: string
+      vencimiento:
+        type: string
+    type: object
+  dtos.Funcionario:
+    properties:
+      anho:
+        type: integer
+      anho_inicio:
+        type: integer
+      apellidos:
+        type: string
+      asignaciones:
+        items:
+          $ref: '#/definitions/dtos.Asignacion'
+        type: array
+      devengado:
+        type: integer
+      discapacidad:
+        type: string
+      documento:
+        type: string
+      entidad:
+        type: string
+      estado:
+        type: string
+      fecha_nacimiento:
+        type: string
+      horario:
+        type: string
+      id:
+        type: string
+      mes:
+        type: string
+      nivel:
+        type: string
+      nombres:
+        type: string
+      oee:
+        type: string
+      presupuestado:
+        type: integer
+      sexo:
+        type: string
+      tipo_discapacidad:
+        type: string
+    type: object
+  dtos.FuncionarioDto:
+    properties:
+      search:
+        items:
+          $ref: '#/definitions/dtos.Search'
+        type: array
+    required:
+    - search
+    type: object
+  dtos.IpsDto:
+    properties:
+      documentos:
+        items:
+          type: string
+        maxItems: 500
+        type: array
+    required:
+    - documentos
+    type: object
+  dtos.ResponseDto-dtos_Asegurado:
+    properties:
+      count:
+        type: integer
+      data:
+        items:
+          $ref: '#/definitions/dtos.Asegurado'
+        type: array
+      error:
+        default: false
+        type: boolean
+      msg:
+        type: string
+    required:
+    - error
+    - msg
+    type: object
+  dtos.ResponseDto-dtos_Funcionario:
+    properties:
+      count:
+        type: integer
+      data:
+        items:
+          $ref: '#/definitions/dtos.Funcionario'
+        type: array
+      error:
+        default: false
+        type: boolean
+      msg:
+        type: string
+    required:
+    - error
+    - msg
+    type: object
+  dtos.ResponseDto-int:
+    properties:
+      count:
+        type: integer
+      data:
+        items:
+          type: integer
+        type: array
+      error:
+        default: false
+        type: boolean
+      msg:
+        type: string
+    required:
+    - error
+    - msg
+    type: object
+  dtos.ResponseDto404:
+    properties:
+      count:
+        default: 0
+        type: integer
+      data:
+        items:
+          type: integer
+        type: array
+      error:
+        default: true
+        type: boolean
+      msg:
+        default: Not found
+        type: string
+    required:
+    - error
+    - msg
+    type: object
+  dtos.ResponseDto500:
+    properties:
+      count:
+        default: 0
+        type: integer
+      data:
+        items:
+          type: integer
+        type: array
+      error:
+        default: true
+        type: boolean
+      msg:
+        default: Internal server error
+        type: string
+    required:
+    - error
+    - msg
+    type: object
+  dtos.RucDto:
+    properties:
+      documentos:
+        items:
+          type: string
+        maxItems: 500
+        type: array
+      nombres:
+        description: optional fields
+        items:
+          type: string
+        maxItems: 500
+        type: array
+    required:
+    - documentos
+    type: object
+  dtos.Search:
+    properties:
+      documento:
+        example: "900999"
+        type: string
+      tipo:
+        example: ruc
+        type: string
+    required:
+    - documento
+    type: object
+info:
+  contact:
+    email: osramirezdev@mail.com
+    name: API Soporte
+  description: Api para consultar datos de cedula via web.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: API Scraper Persona
+  version: "1.0"
+paths:
+  /v1/persona/{cedula}:
+    get:
+      consumes:
+      - application/json
+      description: Se obtiene dato de persona por cedula, si no existe en base de
+        datos se busca por scraping.
+      parameters:
+      - description: Debe introducir un numero de cedula
+        in: path
+        maxLength: 10
+        minLength: 6
+        name: cedula
+        required: true
+        type: string
+      - description: Debe introducir un tipo de busqueda, puede ser 'ruc', 'ips',
+          'funcionario'
+        in: query
+        name: tipo
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dtos.ResponseDto-int'
+        "404":
+          description: No se encontraron datos
+          schema:
+            $ref: '#/definitions/dtos.ResponseDto404'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/dtos.ResponseDto500'
+      summary: busqueda datos de persona por cedula
+      tags:
+      - Personas
+  /v1/scraper/obtener/funcionarios/:
+    post:
+      consumes:
+      - application/json
+      description: Validad si una cedula pertenece a un funcionario publico.
+      parameters:
+      - description: Dto para consultar datos
+        in: body
+        name: funcionario
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.FuncionarioDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dtos.ResponseDto-dtos_Funcionario'
+        "404":
+          description: No se encontro asegurado
+          schema:
+            $ref: '#/definitions/dtos.ResponseDto404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dtos.ResponseDto500'
+      summary: Permite consultar si datos de funcionarios existen por cedula, mes
+        y anho
+      tags:
+      - Scraper
+  /v1/scraper/obtener/ips/:
+    post:
+      consumes:
+      - application/json
+      description: Hacer scraping de ips.
+      parameters:
+      - description: Dto para consultar datos
+        in: body
+        name: ips
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.IpsDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dtos.ResponseDto-dtos_Asegurado'
+        "404":
+          description: No se encontro asegurado
+          schema:
+            $ref: '#/definitions/dtos.ResponseDto404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dtos.ResponseDto500'
+      summary: Permite consultar datos de asegiurados por cedula
+      tags:
+      - Scraper
+  /v1/scraper/obtener/ruc/:
+    post:
+      consumes:
+      - application/json
+      description: Permite consultar si ruc existen por cedula o nombre.
+      parameters:
+      - description: Nombres es campo opcional
+        in: body
+        name: ruc
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.RucDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dtos.ResponseDto-int'
+        "404":
+          description: No se encontro ruc
+          schema:
+            $ref: '#/definitions/dtos.ResponseDto404'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/dtos.ResponseDto500'
+      summary: scraping de documentos o nombres
+      tags:
+      - Scraper
+swagger: "2.0"
