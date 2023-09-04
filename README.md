@@ -1,8 +1,8 @@
 <p align="center">
   <a href="https://github.com/osramirezdev/scraperPersonas">
     <picture>
-      <source height="125" media="(prefers-color-scheme: dark)" srcset="scraperlogo.png">
-      <img height="125" alt="Fiber" src="scraperlogo.png">
+      <source height="350" media="(prefers-color-scheme: dark)" srcset="scraperlogo.png">
+      <img height="350" alt="Scraper Perosnas" src="scraperlogo.png">
     </picture>
   </a>
   <br>
