@@ -1,0 +1,47 @@
+version: "3.9"
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    container_name: api
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    networks:
+      - postgres
+    depends_on:
+      db:
+        condition: "service_healthy"
+  db:
+    env_file:
+      - .env
+    container_name: db
+    image: postgres:14.1-alpine
+    build:
+      context: .
+      dockerfile: db.Dockerfile
+    restart: always
+    networks:
+      - postgres
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+    expose:
+      - "${DB_PORT}"
+    environment:
+      POSTGRES_SCHEMA: "public"
+      POSTGRES_PASSWORD: "${DB_PASSWORD}"
+      POSTGRES_USER: "${DB_USER}"
+      POSTGRES_DB: "${DB_NAME}"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME} -h localhost -p ${DB_PORT}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+networks:
+  postgres:
+    driver: bridge
+volumes:
+  db:
+    driver: local
