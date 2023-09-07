@@ -19,10 +19,15 @@
 
 ## ⚙️ Installation
 
-Para correrlo localmente, tener intalado Go (<a target="_blank" style="color: blue" href="https://go.dev/dl/">download</a>). Version `1.17` o superior.
+**Para correrlo localmente**
+
+  - Tener intalado Go (<a target="_blank" style="color: blue" href="https://go.dev/dl/">download</a>). Version `1.17` o superior.
+  - Tener intalado PostgreSQL (<a target="_blank" style="color: blue" href="https://www.postgresql.org/">download</a>). Version `13` o superior y tener creada la base de datos configurada en el .env file.
 
 ```bash
-go mod download
+go mod download # download modules to local cache
+go mod tidy # add missing and remove unused modules
+go run main.go
 ```
 
 
@@ -34,13 +39,7 @@ cp .env.example .env
 
 Ingresar las credenciales en el archivo `.env`, y setear `STAGE_STATUS` con `prod`.
 
-Buildear con docker
-```bash
-docker build -t fiber .
-docker run -d -p 5000:5000 --name fiber fiber
-```
-
-Tambien se puede ejecutar via docker-compose [docker-compose](https://docs.docker.com/compose/install/)
+Buildear con docker-compose [docker-compose](https://docs.docker.com/compose/install/)
 ```bash
 sudo docker-compose build
 sudo docker-compose up -d
