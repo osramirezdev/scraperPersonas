@@ -41,7 +41,7 @@ cp .env.example .env
 
 Ingresar las credenciales en el archivo `.env`, y setear `STAGE_STATUS` con `prod`.
 
-Buildear con docker-compose [docker-compose](https://docs.docker.com/compose/install/)
+Buildear con [docker-compose](https://docs.docker.com/compose/install/)
 ```bash
 sudo docker-compose build
 sudo docker-compose up -d
