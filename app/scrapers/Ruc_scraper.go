@@ -5,6 +5,8 @@ import (
 	"log"
 
 	"github.com/go-rod/rod"
+	"github.com/go-rod/rod/lib/launcher"
+	"github.com/go-rod/stealth"
 	"github.com/osramirezdev/scraperPersonas/app/dtos"
 )
 
@@ -24,7 +26,15 @@ func init() {
 func (r *rucScraper) GetRucFromScraping(rucDto *dtos.RucDto) ([]dtos.Tributante, error) {
 	datosSpliteados := append(rucDto.Documentos, rucDto.Nombres...)
 
-	browser := rod.New().MustConnect()
+	path, existeNavegador := launcher.LookPath()
+	if existeNavegador {
+		fmt.Println("existe navegador: ", path)
+	} else {
+		fmt.Println("no existe navegador")
+	}
+	u := launcher.New().Bin(path).MustLaunch()
+
+	browser := rod.New().ControlURL(u).MustConnect()
 
 	defer func() {
 		// Cierra el navegador al finalizar
@@ -34,7 +44,8 @@ func (r *rucScraper) GetRucFromScraping(rucDto *dtos.RucDto) ([]dtos.Tributante,
 		}
 	}()
 
-	page := browser.MustPage("https://www.ruc.com.py/").MustWaitLoad()
+	page := stealth.MustPage(browser)
+	page = page.MustNavigate("https://www.ruc.com.py/").MustWaitLoad()
 	var tributantes []dtos.Tributante
 	for i, cadena := range datosSpliteados {
 
