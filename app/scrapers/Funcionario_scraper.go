@@ -8,6 +8,7 @@ import (
 
 	"github.com/go-rod/rod"
 	"github.com/go-rod/rod/lib/input"
+	"github.com/go-rod/rod/lib/launcher"
 	"github.com/go-rod/stealth"
 	"github.com/google/uuid"
 	"github.com/osramirezdev/scraperPersonas/app/dtos"
@@ -25,7 +26,15 @@ func (f *funcionarioScraper) GetFuncionarioFromScraping(docenteDto *dtos.Funcion
 	var mensajeImpreso bool
 	query := docenteDto.Search
 
-	browser := rod.New().MustConnect()
+	path, existeNavegador := launcher.LookPath()
+	if existeNavegador {
+		fmt.Println("existe navegador: ", path)
+	} else {
+		fmt.Println("no existe navegador")
+	}
+	u := launcher.New().Bin(path).MustLaunch()
+
+	browser := rod.New().ControlURL(u).MustConnect()
 
 	defer func() {
 		// Cierra el navegador al finalizar
