@@ -17,7 +17,7 @@
   </ol>
 </p>
 
-## [API Demo](http://apiscraper.yocreativo.com/swagger){:target="_blank"}
+## [API Demo](http://apiscraper.yocreativo.com/swagger)
 <br>
 ## ⚙️ Installation
 
