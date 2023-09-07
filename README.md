@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="http://yocreativo.com:5100/swagger">
+  <a target="_blank" href="http://apiscraper.yocreativo.com/swagger">
     <picture>
       <source height="350" media="(prefers-color-scheme: dark)" srcset="scraperlogo.png">
       <img height="350" alt="Scraper Perosnas" src="scraperlogo.png">
@@ -17,7 +17,7 @@
   </ol>
 </p>
 
-## [API Demo](http://yocreativo.com:5100/swagger)
+## [API Demo](http://apiscraper.yocreativo.com/swagger){:target="_blank"}
 <br>
 ## ⚙️ Installation
 
